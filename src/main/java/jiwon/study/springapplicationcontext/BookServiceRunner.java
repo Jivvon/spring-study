@@ -13,6 +13,6 @@ public class BookServiceRunner implements ApplicationRunner {
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
-		bookService.setUp();
+		System.out.println(bookService.getClassName());
 	}
 }
