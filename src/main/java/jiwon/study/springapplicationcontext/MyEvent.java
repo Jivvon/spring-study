@@ -1,21 +1,21 @@
 package jiwon.study.springapplicationcontext;
 
-import org.springframework.context.ApplicationEvent;
-
 /**
- * bean으로 등록되는 이벤트가 아니다.
+ * 프레임워크(스프링)의 코드가 포함되지 않았다.
+ * 이것이 POJO 기반.
  */
-public class MyEvent extends ApplicationEvent {
+public class MyEvent  {
 
-	private int data;
-
-	public MyEvent(Object source) {
-		super(source);
-	}
+	private final int data;
+	private final Object source;
 
 	public MyEvent(Object source, int data) {
-		super(source);
+		this.source = source;
 		this.data = data;
+	}
+
+	public Object getSource() {
+		return source;
 	}
 
 	public int getData() {
