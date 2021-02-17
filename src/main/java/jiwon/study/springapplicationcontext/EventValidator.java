@@ -8,7 +8,7 @@ public class EventValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return Event.class.equals(clazz);
+		return clazz.isInstance(Event.class);
 	}
 
 	@Override

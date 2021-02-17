@@ -4,26 +4,27 @@ import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
 @Component
 public class AppRunner implements ApplicationRunner {
 
 	@Autowired
-	ResourceLoader resourceLoader;
+	Validator validator; // 스프링 Validator
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
-		Event event = new Event(); // 1. title을 주지 않았기 때문에 에러가 발생할 것이다
-		EventValidator eventValidator = new EventValidator();
-		// 인터페이스는 자주 사용하지만, 구현체(BeanPropertyBindingResult)는 스프링 MVC가 생성해서
-		// 파라미터에 전달시켜주기 때문에 이렇게 직접 사용할 일은 거의 없다.
+		System.out.println(validator.getClass());
+
+		Event event = new Event();
+		event.setLimit(-1);
+		event.setEmail("aa2");
 		Errors errors = new BeanPropertyBindingResult(event, "event");
 
-		eventValidator.validate(event, errors);
+		validator.validate(event, errors);
 
 		System.out.println(errors.hasErrors());
 
